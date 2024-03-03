@@ -19,7 +19,7 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     memberTypes: {
       type: new GraphQLList(MemberType),
-      async resolve(parent, args, context) {
+      async resolve(_, args, context) {
         const { prisma } = context;
         return await prisma.memberType.findMany();
       },
@@ -27,7 +27,7 @@ const RootQuery = new GraphQLObjectType({
     memberType: {
       type: MemberType,
       args: { id: { type: MemberTypeId } },
-      async resolve(parent, args, context) {
+      async resolve(_, args, context) {
         const { prisma } = context;
         return await prisma.memberType.findUnique({
           where: {
@@ -38,7 +38,7 @@ const RootQuery = new GraphQLObjectType({
     },
     users: {
       type: new GraphQLList(UserType),
-      async resolve(parent, args, context, info) {
+      async resolve(_, args, context, info) {
         const { prisma } = context;
         const parsed = parseResolveInfo(info);
         const { fields }: { fields: Record<string, unknown> } =
@@ -81,7 +81,7 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { id: { type: new GraphQLNonNull(UUIDType) } },
-      async resolve(parent, args, context) {
+      async resolve(_, args, context) {
         const { prisma } = context;
         return await prisma.user.findUnique({
           where: {
@@ -92,7 +92,7 @@ const RootQuery = new GraphQLObjectType({
     },
     profiles: {
       type: new GraphQLList(ProfileType),
-      async resolve(parent, args, context) {
+      async resolve(_, args, context) {
         const { prisma } = context;
         return await prisma.profile.findMany();
       },
@@ -100,7 +100,7 @@ const RootQuery = new GraphQLObjectType({
     profile: {
       type: ProfileType,
       args: { id: { type: UUIDType } },
-      async resolve(parent, args, context) {
+      async resolve(_, args, context) {
         const { prisma } = context;
         return await prisma.profile.findUnique({
           where: {
@@ -111,7 +111,7 @@ const RootQuery = new GraphQLObjectType({
     },
     posts: {
       type: new GraphQLList(PostType),
-      async resolve(parent, args, context) {
+      async resolve(_, args, context) {
         const { prisma } = context;
         return await prisma.post.findMany();
       },
@@ -119,7 +119,7 @@ const RootQuery = new GraphQLObjectType({
     post: {
       type: PostType,
       args: { id: { type: UUIDType } },
-      async resolve(parent, args, context) {
+      async resolve(_, args, context) {
         const { prisma } = context;
         return await prisma.post.findUnique({
           where: {
